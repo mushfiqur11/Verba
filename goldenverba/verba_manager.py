@@ -125,6 +125,17 @@ class VerbaManager:
 
         openai_header_key_name = "X-OpenAI-Api-Key"
 
+        # # Check Hugging Face Token
+        # try:
+        #     access_token = os.environ.get("HUGGINGFACE_TOKEN", "")
+        #     if access_token != "":
+        #         additional_header["Authorization"] = f"Bearer {access_token}"
+        #         self.environment_variables["HUGGINGFACE_TOKEN"] = True
+        #     else:
+        #         self.environment_variables["HUGGINGFACE_TOKEN"] = False
+        # except Exception:
+        #     self.environment_variables["HUGGINGFACE_TOKEN"] = False
+
         # Check OpenAI ENV KEY
         try:
             import openai
@@ -393,6 +404,18 @@ class VerbaManager:
                 raise EnvironmentError(
                     "Missing environment variables. When using Azure OpenAI, you need to set OPENAI_BASE_URL, AZURE_OPENAI_RESOURCE_NAME, AZURE_OPENAI_EMBEDDING_MODEL and OPENAI_MODEL. Please check documentation."
                 )
+        
+        # Hugging Face Token with Llama3
+        if os.environ.get("LLAMA3_MODEL_ID", "") != "":
+            self.environment_variables["LLAMA3_MODEL_ID"] = True
+            if os.environ.get("HUGGINGFACE_TOKEN", "") != "":
+                self.environment_variables["HUGGINGFACE_TOKEN"] = True
+            else:
+                raise EnvironmentError(
+                    "Missing environment variables. When using Llama3, you need to set HUGGINGFACE_TOKEN. Please check documentation."
+                )
+        else:
+            self.environment_variables["LLAMA3_MODEL_ID"] = False
 
     def get_schemas(self) -> dict:
         """

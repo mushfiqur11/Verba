@@ -23,6 +23,7 @@ from goldenverba.components.embedding.CohereEmbedder import CohereEmbedder
 from goldenverba.components.embedding.MiniLMEmbedder import MiniLMEmbedder
 from goldenverba.components.embedding.GoogleEmbedder import GoogleEmbedder
 from goldenverba.components.embedding.OllamaEmbedder import OllamaEmbedder
+from goldenverba.components.embedding.Llama3Embedder import Llama3Embedder
 
 from goldenverba.components.retriever.WindowRetriever import WindowRetriever
 
@@ -31,6 +32,7 @@ from goldenverba.components.generation.CohereGenerator import CohereGenerator
 from goldenverba.components.generation.GPT3Generator import GPT3Generator
 from goldenverba.components.generation.GPT4Generator import GPT4Generator
 from goldenverba.components.generation.OllamaGenerator import OllamaGenerator
+from goldenverba.components.generation.Llama3Generator import Llama3Generator
 
 import time
 
@@ -170,6 +172,7 @@ class EmbeddingManager:
             "ADAEmbedder": ADAEmbedder(),
             "CohereEmbedder": CohereEmbedder(),
             "OllamaEmbedder": OllamaEmbedder(),
+            # "Llama3Embedder": Llama3Embedder(),
         }
         self.selected_embedder: str = "ADAEmbedder"
 
@@ -270,6 +273,7 @@ class GeneratorManager:
             "GPT3": GPT3Generator(),
             "Ollama": OllamaGenerator(),
             "Command R+": CohereGenerator(),
+            "Llama3": Llama3Generator(),
         }
         self.selected_generator: str = "GPT3"
 
